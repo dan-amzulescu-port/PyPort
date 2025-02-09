@@ -1,6 +1,6 @@
 from typing import Dict, List
 
-from pyport.models.api_category import BaseResource
+from src.pyport.models.api_category import BaseResource
 
 
 class Entities(BaseResource):

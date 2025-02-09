@@ -2,46 +2,37 @@ import os
 import unittest
 from unittest.mock import patch, MagicMock
 
-# Import the PortClient from your source code.
-from pyport.api_client import PortClient
+# Import the PortClient from your local package.
+from src.pyport.api_client import PortClient
 
 
-class TestPortClient(unittest.TestCase):
-    @patch('pyport.api_client.requests.post')
-    def test_get_access_token(self, mock_post):
-        # Setup: Create a fake token response.
-        expected_token = 'testtoken123'
-        mock_response = MagicMock()
-        mock_response.status_code = 200
-        mock_response.json.return_value = {'accessToken': expected_token}
-        mock_post.return_value = mock_response
-
-        # Optionally, set the environment variables if not passing credentials.
-        os.environ['PORT_CLIENT_ID'] = 'dummy'
-        os.environ['PORT_CLIENT_SECRET'] = 'dummy'
-
-        # Create the PortClient. Disable auto-refresh for testing.
+class TestPortClientInitialization(unittest.TestCase):
+    @patch('src.pyport.api_client.PortClient._get_access_token', return_value='dummy_token')
+    def test_initialization(self, mock_get_token):
+        """
+        Test that the PortClient is initialized correctly and that
+        _get_access_token is patched to return a dummy token.
+        """
         client = PortClient(auto_refresh=False)
+        # Check that the token is set to the dummy value.
+        self.assertEqual(client.token, 'dummy_token')
+        # Verify that the session headers are updated with the dummy token.
+        self.assertEqual(client._session.headers.get("Authorization"), "Bearer dummy_token")
 
-        # Assert that the client token matches the fake token.
-        self.assertEqual(client.token, expected_token)
-
-    @patch('pyport.api_client.requests.Session.request')
-    def test_make_request(self, mock_request):
-        # Setup: Prepare a mock response for a generic API call.
+    @patch('src.pyport.api_client.PortClient._get_access_token', return_value='dummy_token')
+    @patch('src.pyport.api_client.requests.Session.request')
+    def test_make_request(self, mock_request, mock_get_token):
+        """
+        Test the make_request method using a patched _get_access_token.
+        """
         expected_json = {"key": "value"}
         mock_response = MagicMock()
         mock_response.status_code = 200
         mock_response.json.return_value = expected_json
         mock_request.return_value = mock_response
 
-        # Create the PortClient with auto-refresh disabled.
         client = PortClient(auto_refresh=False)
-
-        # Make a sample GET request.
         response = client.make_request('GET', 'test-endpoint')
-
-        # Assert that the response contains the expected JSON.
         self.assertEqual(response.json(), expected_json)
 
 
