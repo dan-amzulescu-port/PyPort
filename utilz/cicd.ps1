@@ -2,6 +2,21 @@
 # This script assumes it is run from the "utilz" folder.
 # The "src" folder is one level up from utilz.
 
+function Run-Tests {
+    Write-Host "Running tests..."
+    # Change to the tests directory (assume tests are one level up from utilz)
+    Push-Location ..\tests
+    try {
+        # Ensure the local src directory is in PYTHONPATH
+        $env:PYTHONPATH = "$(Get-Location)\..\src"
+        python -m unittest discover -s .
+        Write-Host "All tests passed."
+    } catch {
+        Write-Error "Tests failed: $($_.Exception.Message)"
+    }
+    Pop-Location
+}
+
 function Lint-Code {
     Write-Host "Running lint..."
     Push-Location ..\src
@@ -69,6 +84,7 @@ while ($running) {
     Write-Host "5) Exit"
     $choice = Read-Host "Enter your choice (1-5)"
     switch ($choice) {
+        "0" { Run-Tests }
         "1" { Lint-Code }
         "2" { Build-Package }
         "3" {
