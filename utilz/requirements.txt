@@ -1,11 +1,10 @@
 python-dotenv~=1.0.1
 requests~=2.32.3
+logging ~= 0.4.9.6
 
-# for building the package
-setuptools~=75.8.0
 flake8~=4.0.1
 build~=0.7.0
-setuptools~=75.8.0
 twine~=3.8.0
 coverage~=7.6.11
-coverage-badge~=1.1.2
+coverage_badge~=1.1.2
+toml~=0.10.2

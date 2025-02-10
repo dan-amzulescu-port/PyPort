@@ -6,11 +6,11 @@ import time
 
 import requests
 
-from src.pyport.actions.actions_api_svc import Actions
-from src.pyport.entities.entities_api_svc import Entities
-from src.pyport.pages.pages_api_svc import Pages
-from src.pyport.blueprints.blueprint_api_svc import Blueprints
-from src.constants import PORT_API_US_URL, PORT_API_URL, GENERIC_HEADERS
+from pyport.actions.actions_api_svc import Actions
+from pyport.entities.entities_api_svc import Entities
+from pyport.pages.pages_api_svc import Pages
+from pyport.blueprints.blueprint_api_svc import Blueprints
+from pyport.constants import PORT_API_US_URL, PORT_API_URL, GENERIC_HEADERS
 
 
 class PortClient:

@@ -1,16 +1,16 @@
 [project]
 name = "PyPort"
-version = "0.1.3"  # Replace with the actual version from version.txt
+version = "0.1.10"
 description = "Port REST API Wrapper"
 authors = [
   { name = "Dan Amzulescu", email = "dan.a@getport.io" }
 ]
-license = { file = "LICENSE" }  # Assuming you have a LICENSE file
+license = { file = "LICENSE" }
 readme = "README.md"
 requires-python = ">=3.8"
 classifiers = [
   "Development Status :: 4 - Beta",
-  "Intended Audience :: Customer Service",
+  "Intended Audience :: Developers",
   "Topic :: Software Development :: Libraries",
   "License :: OSI Approved :: MIT License",
   "Programming Language :: Python",
@@ -21,15 +21,14 @@ classifiers = [
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12"
 ]
-
-[build-system]
-requires = ["setuptools>=42", "wheel"]
-build-backend = "setuptools.build_meta"
-
 dependencies = [
   "python-dotenv~=1.0.1",
   "requests~=2.32.3",
 ]
+
+[build-system]
+requires = ["setuptools>=67.0", "wheel", "build"]
+build-backend = "setuptools.build_meta"
 
 [project.optional-dependencies]
 dev = [

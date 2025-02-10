@@ -1,5 +1,5 @@
 from typing import Dict, List
-from src.pyport.models.api_category import BaseResource
+from pyport.models.api_category import BaseResource
 
 
 class Pages(BaseResource):
