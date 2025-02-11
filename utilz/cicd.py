@@ -50,10 +50,11 @@ def update_version_in_toml():
 
 def update_readme_badge(new_badge):
     """Update README.md with coverage badge."""
-    readme_path = os.path.join(PROJECT_ROOT, 'src', 'README.md')
+    src_readme_path = os.path.join(PROJECT_ROOT, 'src', 'README.md')
+    gh_readme_path = os.path.join(PROJECT_ROOT, 'README.md')
 
     # Read existing README
-    with open(readme_path, 'r') as f:
+    with open(src_readme_path, 'r') as f:
         content = f.read()
 
     # Regex to replace or insert coverage badge
@@ -68,9 +69,9 @@ def update_readme_badge(new_badge):
         updated_content = new_badge + '\n\n' + content
 
     # Write updated README
-    with open(readme_path, 'w') as f:
-        f.write(updated_content)
-
+    with open(src_readme_path, 'w') as file1, open(gh_readme_path, "w") as file2:
+        file1.write(updated_content)
+        file2.write(updated_content)
 
 def generate_coverage_badge(cov):
     """Generate coverage badge using Coverage report."""
@@ -106,7 +107,6 @@ def generate_coverage_badge(cov):
     badge_url = f"https://img.shields.io/badge/coverage-{coverage_percentage:.2f}%25-{color}"
 
     return badge_url, coverage_percentage
-
 
 def run_tests():
     """Run tests with coverage."""
@@ -144,7 +144,6 @@ def run_tests():
         print(f"Tests failed: {e}", file=sys.stderr)
         sys.exit(1)
 
-
 def lint_code():
     """Run linting on the source code."""
     print("Running lint...")
@@ -166,7 +165,6 @@ def lint_code():
     except Exception as e:
         print(f"Linting failed: {e}", file=sys.stderr)
         sys.exit(1)
-
 
 def build_package():
     """Build the Python package using a subprocess call to `python -m build`."""
