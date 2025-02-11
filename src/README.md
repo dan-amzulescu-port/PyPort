@@ -9,7 +9,7 @@
 
 _Repo metadata_
 
-![Coverage](https://img.shields.io/badge/coverage-79.00%25-green)
+![Coverage](https://img.shields.io/badge/coverage-81.00%25-green)
 ![GitHub issues](https://img.shields.io/github/issues/dan-amzulescu-port/pyport)
 [![GitHub tag](https://img.shields.io/github/tag/dan-amzulescu-port/pyport?include_prereleases=&sort=semver&color=blue)](https://github.com/dan-amzulescu-port/pyport/releases/)
 [![License](https://img.shields.io/badge/License-MIT-blue)](#license)
