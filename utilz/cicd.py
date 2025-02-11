@@ -109,23 +109,26 @@ def generate_coverage_badge(cov):
     return badge_url, coverage_percentage
 
 def run_tests():
-    """Run tests with coverage."""
+    """Run tests with coverage and generate an LCOV report."""
     print("Running tests with coverage...")
+    # Determine the project root (assumes this file is inside a subfolder, e.g. 'scripts' or similar)
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     src_path = os.path.join(project_root, 'src')
 
     try:
         os.chdir(project_root)
 
+        # Initialize coverage with an omit list for files we don't want to include.
         cov = coverage.Coverage(
             omit=[
                 '**/__init__.py',  # Ignore all __init__.py files
-                'tests/*',  # Ignore entire tests folder
-                '*/test_*.py',  # Ignore test files
+                'tests/*',         # Ignore the tests folder
+                '*/test_*.py',     # Ignore individual test files
             ]
         )
         cov.start()
 
+        # Discover and run tests using unittest.
         test_loader = unittest.TestLoader()
         test_suite = test_loader.discover('tests')
         test_runner = unittest.TextTestRunner()
@@ -136,6 +139,12 @@ def run_tests():
         print("\nDetailed Coverage Report:")
         cov.report(show_missing=True)
 
+        # Generate an LCOV report.
+        # This command requires the coverage-lcov plugin to be installed.
+        subprocess.run(["coverage", "lcov", "-o", "lcov.info"], check=True)
+        print("LCOV report generated at lcov.info")
+
+        # Generate a badge and update the README badge (functions defined elsewhere).
         badge_url, coverage_percentage = generate_coverage_badge(cov)
         update_readme_badge(f"![Coverage]({badge_url})")
 
