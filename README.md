@@ -8,7 +8,7 @@
 
 
 _Repo metadata_
-
+[![Maintainability](https://api.codeclimate.com/v1/badges/991619e6dc8861ebeb50/maintainability)](https://codeclimate.com/github/dan-amzulescu-port/PyPort/maintainability)
 ![Coverage](https://img.shields.io/badge/coverage-90.00%25-brightgreen)
 ![GitHub issues](https://img.shields.io/github/issues/dan-amzulescu-port/pyport)
 [![GitHub tag](https://img.shields.io/github/tag/dan-amzulescu-port/pyport?include_prereleases=&sort=semver&color=blue)](https://github.com/dan-amzulescu-port/pyport/releases/)
